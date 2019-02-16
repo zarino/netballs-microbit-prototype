@@ -1,24 +1,21 @@
-let group: number = 1
+let team: number = 0
+let teams: string[] = ["c", "m", "y", "p"]
 
-radio.setGroup(group)
+radio.setGroup(1)
 
 input.onButtonPressed(Button.A, () => {
-    group = Math.max(group - 1, 0)
-    radio.setGroup(group)
+    team = Math.max(team - 1, 0)
 })
 
 input.onButtonPressed(Button.B, () => {
-    group = Math.min(group + 1, 255)
-    radio.setGroup(group)
+    team = Math.min(team + 1, teams.length - 1)
 })
 
 basic.forever(() => {
-    basic.showIcon(IconNames.Cow)
-    basic.pause(500)
-    basic.showNumber(group)
-    basic.pause(500)
+    basic.showString(teams[team])
+    basic.pause(100)
 })
 
 basic.forever(() => {
-    radio.sendNumber(1)
+    radio.sendString(teams[team])
 })
